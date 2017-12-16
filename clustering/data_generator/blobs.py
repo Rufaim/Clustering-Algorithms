@@ -18,11 +18,8 @@ def make_blobs(n_samples=100, centers=3, cluster_std=1.0,
         generated at random.
     shuffle : boolean, optional (default=True)
         Shuffle the samples.
-    seed : int, RandomState instance or None, optional (default=None)
-        If int, random_state is the seed used by the random number generator;
-        If RandomState instance, random_state is the random number generator;
-        If None, the random number generator is the RandomState instance used
-        by `np.random`.
+    seed : int or None, optional (default=None)
+        seed used by the random number generator;
     Returns
     -------
     X : array of shape [n_samples, 2]

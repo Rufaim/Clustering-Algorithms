@@ -24,11 +24,8 @@ def make_circles(n_samples=100, centers=3, center_box=(-10.0, 10.0),
         The array of radiuses for each cluser. If None provided, will be generated randomly.
     shuffle : bool, optional (default=True)
         Whether to shuffle the samples.
-    seed : int, RandomState instance or None, optional (default=None)
-        If int, random_state is the seed used by the random number generator;
-        If RandomState instance, random_state is the random number generator;
-        If None, the random number generator is the RandomState instance used
-        by `np.random`.
+    seed : int or None, optional (default=None)
+        seed used by the random number generator;
     Returns
     -------
     X : array of shape [n_samples, 2]
