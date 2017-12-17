@@ -73,8 +73,41 @@ def affinity_propagation(S, convergence_iter=15, max_iter=100, discount=0.5):
 
 
 class AffinityPropagation(ClusterAlghorihm):
+	"""Affinity Propagation Clustering alghorithm.
+
+	Parameters
+	----------
+	discount_factor : float, optional, default: 0.5
+		Discount_factor for exponetial update. Between 0 and 1.
+	max_iter : int, optional, default: 200
+		Maximum number of iterations.
+	convergence_iter : int, optional, default: 15
+		Number of iterations with no change in the number
+		of clusters that marks the convergence.
+	preference : array-like of shape (n_samples,) or float, optional, default: None
+	    Self-affinity of point. Points with larger values are more likely
+	    to be chosen as cluster center. Defaultly set as median of fit input.
+	affinity : AffinityType, optional, default : EUCLIDIAN
+		Type of affinity to be used.
+		If PRECOMPUTED, then affinity matrix meant to be passed to fit.
+		If EUCLIDIAN, then negative squared euclidean distance will be used.
+
+    Attributes
+    ----------
+	cluster_centers_idx : array of shape (n_clusters,)
+		Indices of cluster centers
+    labels : array, shape (n_samples,)
+        Cluster labels of each point.
+
+	References
+	----------
+	Brendan J. Frey and Delbert Dueck, "Clustering by Passing Messages
+	Between Data Points", Science Feb. 2007
+	"""
 
 	class AffinityType(enum.Enum):
+		"""Types of affinity will be passed into fit method
+		"""
 		EUCLIDIAN = 0
 		PRECOMPUTED = 1
 
