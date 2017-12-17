@@ -45,7 +45,7 @@ def affinity_propagation(S, preference=None, convergence_iter=15, max_iter=100, 
 		#					a(k,k) = sum{j != k}(max(0,r(j,k)))
 		t = np.maximum(0,R)
 		t.flat[::N + 1] = R.flat[::N + 1]
-		t = np.sum(t, axis=0)[:,None]-t
+		t = np.sum(t, axis=0)-t
 		diag_elems = t.flat[::N + 1]
 		t = np.minimum(0,t)
 		t.flat[::N + 1] = diag_elems
@@ -65,3 +65,19 @@ def affinity_propagation(S, preference=None, convergence_iter=15, max_iter=100, 
 			if (not unconverged and (K > 0)) or (it == max_iter):
 				break
 		#section_3_end
+
+	I = np.where(E)[0] # I = np.where(np.diag(A + R) > 0)[0]
+	K = len(I)  # Identify exemplars
+
+	if K > 0:
+		C = np.argmax(A+R, axis=1)
+		cluster_centers_idx = np.unique(C)
+		labels = np.searchsorted(cluster_centers_idx, C)
+	else:
+		# unconvergened case
+		labels = np.empty((N, 1))
+		cluster_centers_idx = None
+		labels.fill(np.nan)
+
+	return cluster_centers_idx, labels
+
