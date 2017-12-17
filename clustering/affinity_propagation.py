@@ -24,7 +24,7 @@ def affinity_propagation(S, convergence_iter=15, max_iter=100, discount=0.5):
 		t[index, max_elem_idx] = -np.inf
 		second_max_elem = np.max(t, axis=1)
 		t = S - max_elem[:, None]
-		t[index, max_elem_idx] = S[:, max_elem_idx] - second_max_elem
+		t[index, max_elem_idx] = S[index, max_elem_idx] - second_max_elem
 		#section_1_end
 
 		# exponential update
@@ -79,7 +79,7 @@ class AffinityPropagation(ClusterAlghorihm):
 		PRECOMPUTED = 1
 
 	def __init__(self, discount_factor=.5, max_iter=200, convergence_iter=15,
-				preference=None, affinity=AffinityPropagation.AffinityType.EUCLIDIAN):
+				preference=None, affinity=AffinityType.EUCLIDIAN):
 		assert max_iter > 0
 		assert convergence_iter > 0
 
