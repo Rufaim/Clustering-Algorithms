@@ -1,22 +1,11 @@
 import numpy as np
+import enum
+from .interfaces import ClusterAlghorihm
+from .utility import euclidean_distances
 
-def affinity_propagation(S, preference=None, convergence_iter=15, max_iter=100, discount=0.5, seed=None):
-	S = np.array(S, copy=True)
-	
-	assert S.ndim == 2
 
-	if S.shape[0] != S.shape[1]:
-		raise ValueError("S should be a square array")
-
-	if preference is None:
-		preference = np.median(S)
-	if discount <= 0 or discount >= 1:
-		raise ValueError('Discount factor should be 0 < DF < 1')
-
+def affinity_propagation(S, convergence_iter=15, max_iter=100, discount=0.5):
 	N = S.shape[0]
-
-	np.random.seed(seed)
-
 
 	A = np.zeros((N, N))
 	R = np.zeros((N, N))
@@ -80,4 +69,50 @@ def affinity_propagation(S, preference=None, convergence_iter=15, max_iter=100, 
 		labels.fill(np.nan)
 
 	return cluster_centers_idx, labels
+
+
+
+class AffinityPropagation(ClusterAlghorihm):
+
+	class AffinityType(enum.Enum):
+		EUCLIDIAN = 0
+		PRECOMPUTED = 1
+
+	def __init__(self, discount_factor=.5, max_iter=200, convergence_iter=15,
+				preference=None, affinity=AffinityPropagation.AffinityType.EUCLIDIAN):
+		assert max_iter > 0
+		assert convergence_iter > 0
+
+		if not isinstance(affinity,AffinityPropagation.AffinityType):
+			raise ValueError('affinity should be of affinity_type')
+		if discount_factor <= 0 or discount_factor >= 1:
+			raise ValueError('Discount factor should be 0 < DF < 1')
+
+		self.discount_factor = discount_factor
+		self.max_iter = max_iter
+		self.convergence_iter = convergence_iter
+		self.preference = preference
+		self.affinity = affinity
+
+	def fit(self,X):
+		X = np.atleast_2d(X)
+
+		assert X.ndim == 2
+
+		if self.affinity is self.AffinityType.PRECOMPUTED:
+			S = X.copy()
+
+			if S.shape[0] != S.shape[1]:
+				raise ValueError("Precomputed affinity should be a square array")
+		elif self.affinity ==  self.AffinityType.EUCLIDIAN:
+			S = -euclidean_distances(X, squared=True)
+
+		if self.preference is None:
+			preference = np.median(S)
+		S.flat[::(S.shape[0] + 1)] = preference
+
+		self.cluster_centers_idx, self.labels  = affinity_propagation(S,
+				convergence_iter=self.convergence_iter, max_iter=self.max_iter, discount=self.discount_factor)
+
+		return self
 
