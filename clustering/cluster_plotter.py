@@ -37,4 +37,4 @@ def plot_cluster(X,labels,cluster_centers=None,title="Clustered Data"):
 				pyplot.plot([cluster_centers[i,0], x[0]], [cluster_centers[i,1], x[1]], col)
 
 	pyplot.title(title)
-	pyplot.show()
+	#pyplot.show()
