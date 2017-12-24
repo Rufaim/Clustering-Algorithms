@@ -37,3 +37,9 @@ def load_Jain_toy_dataset():
 
 def load_flame():
 	return (*conventional_reader(_getModulePath()+"\\flame.txt"), "Flame")
+
+def load_birch1():
+	return (*conventional_reader(_getModulePath()+"\\birch1.txt"), "Birch_1")
+
+def load_birch2():
+	return (*conventional_reader(_getModulePath()+"\\birch2.txt"), "Birch_2")
