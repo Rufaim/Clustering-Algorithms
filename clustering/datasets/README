@@ -21,3 +21,9 @@ L. Fu and E. Medico, "FLAME, a novel fuzzy clustering method for the analysis of
 Birch1(N=100000, k=100)
 Birch2(N=100000, k=100)
 Zhang et al., "BIRCH: A new data clustering algorithm and its applications", Data Mining and Knowledge Discovery, 1 (2), 141-182, 1997.
+
+EngyTime(N=4096,k=2)
+Target(N=770,k=6)
+TwoDiamonds(N=800,k=2)
+WingNut(N=1016,k=2)
+Alfred Ultsch, "Clustering with SOM: U*C, in Proc. Workshop on Self Organizing Feature Maps", pp 31-37, Paris. 2005.
