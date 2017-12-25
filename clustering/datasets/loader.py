@@ -43,3 +43,15 @@ def load_birch1():
 
 def load_birch2():
 	return (*conventional_reader(_getModulePath()+"\\birch2.txt"), "Birch_2")
+
+def load_EngyTime():
+	return (*conventional_reader(_getModulePath()+"\\EngyTime.txt"), "EngyTime")
+
+def load_Target():
+	return (*conventional_reader(_getModulePath()+"\\Target.txt"), "Target")
+
+def load_TwoDiamonds():
+	return (*conventional_reader(_getModulePath()+"\\TwoDiamonds.txt"), "TwoDiamonds")
+
+def load_WingNut():
+	return (*conventional_reader(_getModulePath()+"\\WingNut.txt"), "WingNut")
