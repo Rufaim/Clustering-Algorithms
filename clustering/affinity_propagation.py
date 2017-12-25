@@ -141,8 +141,8 @@ class AffinityPropagation(ClusterAlghorihm):
 			S = -euclidean_distances(X, squared=True)
 
 		if self.preference is None:
-			preference = np.median(S)
-		S.flat[::(S.shape[0] + 1)] = preference
+			self.preference = np.median(S)
+		S.flat[::(S.shape[0] + 1)] = self.preference
 
 		self.cluster_centers_idx, self.labels  = affinity_propagation(S,
 				convergence_iter=self.convergence_iter, max_iter=self.max_iter, discount=self.discount_factor)
